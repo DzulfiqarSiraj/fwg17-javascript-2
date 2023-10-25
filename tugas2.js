@@ -95,4 +95,4 @@ function searchName(pattern, limit, filterFun){
   filterFun(myArr, limit)
 }
 
-searchName('ne',3,showArrFiltered)
+searchName('an',3,showArrFiltered)
