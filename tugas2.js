@@ -2,46 +2,94 @@
 // Week 2
 // Oct 25, 2023
 
-const name = [
-  "Abigail",
-  "Alexandra",
-  "Alison",
-  "Amanda",
-  "Angela",
-  "Bella",
-  "Carol",
-  "Caroline",
-  "Carolyn",
-  "Deirdre",
-  "Diana",
-  "Elizabeth",
-  "Ella",
-  "Faith",
-  "Olivia",
-  "Penelope",
-];
+// string to lower case function
+function lowerCaseFun(str) {
+  const upperAlpha = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]; //length 26
+  const lowerAlpha = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z",
+  ]; //length 26
+
+  let caseTemp = ""
+  for(let i = 0; i < str.length;i++){
+    if(str[i] == " "){
+      caseTemp = caseTemp + str[i]
+    }
+    for(let j = 0; j < 26;j++){
+      if(str[i] == upperAlpha[j] || str[i] == lowerAlpha[j]){
+        caseTemp = caseTemp + lowerAlpha[j]
+      }
+    }
+  }
+  return caseTemp
+}
+
+// string to upper case function
+function upperCaseFun(str) {
+  const upperAlpha = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]; //length 26
+  const lowerAlpha = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z",
+  ]; //length 26
+
+  let caseTemp = ""
+  for(let i = 0; i < str.length;i++){
+    if(str[i] == " "){
+      caseTemp = caseTemp + str[i]
+    }
+    for(let j = 0; j < 26;j++){
+      if(str[i] == upperAlpha[j] || str[i] == lowerAlpha[j]){
+        caseTemp = caseTemp + upperAlpha[j]
+      }
+    }
+  }
+  return caseTemp
+}
 
 function filterName(arr, pattern) {
-  if (typeof pattern !== "string") {
+  if(typeof pattern !== "string") {
     console.log("Input must be string");
     return;
   }
-
+  const newPattern = lowerCaseFun(pattern)
+  
   let arrTemp = [];
-  for (let i = 0; i < arr.length; i++) {
-    arr[i] = arr[i].toLowerCase();
-    let patternTemp = "";
-    for (let j = 0; j < arr[i].length; j++) {
-      if (patternTemp == pattern) {
-        arrTemp = [...arrTemp, arr[i]];
+  let str = ""
+
+  for(let i = 0; i < arr.length;i++){
+    strTemp = lowerCaseFun(arr[i])
+    for(let j = 1; j < strTemp.length;j++){
+      str = (strTemp[j-1] + strTemp[j])
+      if(str == newPattern){
+        arrTemp = [...arrTemp, arr[i]]
+        str = ""
+        continue
       }
-      if (patternTemp.length == 2) {
-        patternTemp = "";
-      }
-      patternTemp += arr[i][j];
+      str = ""
     }
   }
-  return arrTemp;
+
+  return arrTemp
 }
 
-console.log(filterName(name, "an"));
+function showArrFiltered(arr, limit){
+  if(arr.length === 0 || limit === 0){
+    console.log("No Result")
+    return
+  }
+  if(limit > arr.length){
+    console.log(`Limit is too high. Max length of this data is ${arr.length}`)
+    return
+  }
+  let result = []
+  for(let k = 0;k < limit;k++){
+    result = [...result, arr[k]]
+  }
+  console.log(result)
+}
+
+function searchName(pattern, limit, filterFun){
+  const name = ["Abigail","Alexandra","Alison","Amanda","Angela","Bella","Carol","Caroline","Carolyn","Deirdre","Diana","Elizabeth","Ella","Faith","Olivia","Penelope",];
+
+  const myArr = filterName(name,pattern)
+
+  filterFun(myArr, limit)
+}
+
+searchName('ne',3,showArrFiltered)
