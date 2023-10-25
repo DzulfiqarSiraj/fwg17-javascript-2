@@ -1,4 +1,8 @@
 /*
+Task Javascript Introduction
+Week 2
+Oct 25, 2023
+
 1. toLowerCase (string)
   untuk merubah setiap huruf dalam string menjadi huruf non-kapital
   contoh:
