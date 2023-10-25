@@ -42,6 +42,7 @@ function upperCaseFun(str) {
   return caseTemp
 }
 
+// filtering array by pattern function
 function filterName(arr, pattern) {
   if(typeof pattern !== "string") {
     console.log("Input must be string");
@@ -68,6 +69,7 @@ function filterName(arr, pattern) {
   return arrTemp
 }
 
+// showing filtered array by limit function
 function showArrFiltered(arr, limit){
   if(arr.length === 0 || limit === 0){
     console.log("No Result")
@@ -84,6 +86,7 @@ function showArrFiltered(arr, limit){
   console.log(result)
 }
 
+// searching name in filtered array by limit function with callback
 function searchName(pattern, limit, filterFun){
   const name = ["Abigail","Alexandra","Alison","Amanda","Angela","Bella","Carol","Caroline","Carolyn","Deirdre","Diana","Elizabeth","Ella","Faith","Olivia","Penelope",];
 
