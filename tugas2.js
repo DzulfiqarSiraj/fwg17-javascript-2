@@ -51,18 +51,21 @@ function filterName(arr, pattern) {
   const newPattern = lowerCaseFun(pattern)
   
   let arrTemp = [];
-  let str = ""
 
-  for(let i = 0; i < arr.length;i++){
-    strTemp = lowerCaseFun(arr[i])
-    for(let j = 1; j < strTemp.length;j++){
-      str = (strTemp[j-1] + strTemp[j])
-      if(str == newPattern){
-        arrTemp = [...arrTemp, arr[i]]
-        str = ""
-        continue
+  for(let i = 0; i < arr.length; i++){
+    let lowChar = lowerCaseFun(arr[i]);
+    for(let j = 0; j < lowChar.length; j++){
+      let strTemp = ""
+      for(let k = j; k < newPattern.length + j;k++){
+        if(lowChar[k]){
+          strTemp += lowChar[k]
+        }
       }
-      str = ""
+      if(strTemp === pattern){
+        if(arrTemp[i] !== true){
+          arrTemp = [...arrTemp, arr[i]]
+        }
+      }
     }
   }
 
@@ -71,18 +74,16 @@ function filterName(arr, pattern) {
 
 // showing filtered array by limit function
 function showArrFiltered(arr, limit){
-  if(arr.length === 0 || limit === 0){
-    console.log("No Result")
-    return
-  }
-  if(limit > arr.length){
-    console.log(`Limit is too high. Max length of this data is ${arr.length}`)
-    return
-  }
   let result = []
-  for(let k = 0;k < limit;k++){
-    result = [...result, arr[k]]
+  for(let i = 0; i < limit; i++){
+    if(limit <= 0){
+      return
+    }
+    if(arr[i] !== undefined){
+      result = [...result, arr[i]]
+    }
   }
+
   console.log(result)
 }
 
@@ -95,4 +96,4 @@ function searchName(pattern, limit, filterFun){
   filterFun(myArr, limit)
 }
 
-searchName('an',3,showArrFiltered)
+searchName('ol',10,showArrFiltered)
