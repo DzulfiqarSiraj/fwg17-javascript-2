@@ -96,4 +96,39 @@ function searchName(pattern, limit, filterFun){
   filterFun(myArr, limit)
 }
 
+console.log('Hasil menggunakan algoritma 1:')
 searchName('ol',10,showArrFiltered)
+
+
+// menggunakan built-in function
+
+const listName = ["Abigail","Alexandra","Alison","Amanda","Angela","Bella","Carol","Caroline","Carolyn","Deirdre","Diana","Elizabeth","Ella","Faith","Olivia","Penelope",];
+
+function filteringArray(data, pattern, limit){
+  if(typeof data !== 'object'){
+    console.log("data type must be array")
+    return
+  }
+
+  if(typeof pattern != 'string'){
+    console.log("pattern type must be string")
+    return
+  }
+
+  if(typeof limit != 'number'){
+    console.log("limit type must be number")
+    return
+  }
+  
+  const arrFiltered = (arr) => {
+    let arrNew = arr.toLowerCase();
+    if(arrNew.includes(pattern)){
+      return arrNew
+    }
+  }
+  
+  console.log(data.filter(arrFiltered).slice(0,limit))
+}
+
+console.log('Hasil menggunakan algoritma 2:')
+filteringArray(listName,'ol',2)
