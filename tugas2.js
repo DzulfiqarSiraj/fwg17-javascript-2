@@ -48,6 +48,7 @@ function filterName(arr, pattern) {
     console.log("Input must be string");
     return;
   }
+  
   const newPattern = lowerCaseFun(pattern)
   
   let arrTemp = [];
@@ -96,9 +97,6 @@ function searchName(pattern, limit, filterFun){
   filterFun(myArr, limit)
 }
 
-console.log('Hasil menggunakan algoritma 1:')
-searchName('ol',10,showArrFiltered)
-
 
 // menggunakan built-in function
 
@@ -130,5 +128,30 @@ function filteringArray(data, pattern, limit){
   console.log(data.filter(arrFiltered).slice(0,limit))
 }
 
-console.log('Hasil menggunakan algoritma 2:')
-filteringArray(listName,'ol',2)
+
+// Algoritma menggunakan forEach
+
+function filterArrayForEach(pattern, limit, callback){
+  const name = ["Abigail","Alexandra","Alison","Amanda","Angela","Bella","Carol","Caroline","Carolyn","Deirdre","Diana","Elizabeth","Ella","Faith","Olivia","Penelope",];
+  let newName = [];
+  name.forEach(n => newName.push(n.toLowerCase()))
+  
+  console.log(callback(newName, pattern).slice(0, limit))
+}
+
+let filtering = (data, pattern) => {
+  return data.filter(d => d.includes(pattern))
+}
+
+
+// Algoritma menggunakan map
+
+function filterArrayMap(pattern, limit, callback){
+  const name = ["Abigail","Alexandra","Alison","Amanda","Angela","Bella","Carol","Caroline","Carolyn","Deirdre","Diana","Elizabeth","Ella","Faith","Olivia","Penelope",];
+  console.log(callback(name.map(n => lowerCaseFun(n)), pattern).slice(0, limit))
+}
+
+searchName('an',2,showArrFiltered)
+filteringArray(listName,'an',2)
+filterArrayForEach('an',2, filtering)
+filterArrayMap('an',2, filtering)
