@@ -42,6 +42,30 @@ function upperCaseFun(str) {
   return caseTemp
 }
 
+// string to Capitalize function
+function stringCapitalizeFun(str){
+  let result = ""
+  let strTempCap = ""
+  let strTemp = ""
+  for(let i = 0; i < str.length; i++){
+    strTemp += str[i]
+    if(str[i] === " " || i === str.length - 1){
+      for(let j = 0; j < strTemp.length; j++){
+        if(j === 0){
+          strTempCap += upperCaseFun(strTemp[j])
+        } else {
+          strTempCap += strTemp[j]
+        }
+      }
+      result += strTempCap
+      strTemp = ""
+    }
+    strTempCap = ""
+  }
+
+  return result
+}
+
 // filtering array by pattern function
 function filterName(arr, pattern) {
   if(typeof pattern !== "string") {
@@ -136,7 +160,7 @@ function filterArrayForEach(pattern, limit, callback){
   let newName = [];
   name.forEach(n => newName.push(n.toLowerCase()))
   
-  console.log(callback(newName, pattern).slice(0, limit))
+  console.log(callback(newName, pattern).slice(0, limit).map(n => stringCapitalizeFun(n)))
 }
 
 let filtering = (data, pattern) => {
@@ -148,7 +172,7 @@ let filtering = (data, pattern) => {
 
 function filterArrayMap(pattern, limit, callback){
   const name = ["Abigail","Alexandra","Alison","Amanda","Angela","Bella","Carol","Caroline","Carolyn","Deirdre","Diana","Elizabeth","Ella","Faith","Olivia","Penelope",];
-  console.log(callback(name.map(n => lowerCaseFun(n)), pattern).slice(0, limit))
+  console.log(callback(name.map(n => lowerCaseFun(n)), pattern).slice(0, limit).map(n => stringCapitalizeFun(n)))
 }
 
 searchName('an',2,showArrFiltered)
