@@ -72,28 +72,33 @@ function filterName(arr, pattern) {
     console.log("Input must be string");
     return;
   }
+
+  let newArr = [];
+  for(let i = 0; i < arr.length; i++){
+    newArr = [...newArr, lowerCaseFun(arr[i])]
+  };
   
   const newPattern = lowerCaseFun(pattern)
   
   let arrTemp = [];
+  let strTemp = ""
 
-  for(let i = 0; i < arr.length; i++){
-    let lowChar = lowerCaseFun(arr[i]);
-    for(let j = 0; j < lowChar.length; j++){
-      let strTemp = ""
-      for(let k = j; k < newPattern.length + j;k++){
-        if(lowChar[k]){
-          strTemp += lowChar[k]
-        }
+  for(let i = 0; i < newArr.length; i++){
+    let char = newArr[i]
+    for(let j = 0; j < char.length; j++){
+      for(let k = j; k < newPattern.length + j; k++){
+        strTemp += char[k]
       }
-      if(strTemp === pattern){
-        if(arrTemp[i] !== true){
-          arrTemp = [...arrTemp, arr[i]]
-        }
+      if(strTemp == newPattern){
+        arrTemp = [...arrTemp, arr[i]]
+        strTemp = ""
+        continue
+      } else {
+        strTemp = ""
       }
     }
   }
-
+  
   return arrTemp
 }
 
